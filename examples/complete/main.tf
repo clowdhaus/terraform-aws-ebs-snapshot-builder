@@ -5,8 +5,8 @@ provider "aws" {
 data "aws_availability_zones" "available" {}
 
 locals {
-  region = "us-east-1"
-  name   = "ebs-snapshot-builder-ex-${basename(path.cwd)}"
+  region = "us-east-2"
+  name   = "ex-ebs-snapshot-builder"
 
   vpc_cidr = "10.0.0.0/16"
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
@@ -25,7 +25,19 @@ locals {
 module "ebs_snapshot_builder" {
   source = "../.."
 
-  create = false
+  name = local.name
+
+  # Images to cache
+  public_images = [
+    "nvcr.io/nvidia/k8s-device-plugin:v0.16.2", # 120 MB compressed / 351 MB decompressed
+    "nvcr.io/nvidia/pytorch:24.08-py3",         # 9.5 GB compressed / 20.4 GB decompressed
+  ]
+
+  # AZs to enable fast snapshot restore
+  fsr_availability_zone_names = local.azs
+
+  vpc_id    = module.vpc.vpc_id
+  subnet_id = element(module.vpc.private_subnets, 0)
 
   tags = local.tags
 }
@@ -42,7 +54,7 @@ module "ebs_snapshot_builder_disabled" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   name = local.name
   cidr = local.vpc_cidr
