@@ -12,3 +12,17 @@ output "start_execution_command" {
 ))}
   EOT
 }
+
+################################################################################
+# Snapshot SSM Parameter
+################################################################################
+
+output "ssm_parameter_arn" {
+  description = "The ARN of the SSM parameter storing the snapshot name"
+  value       = try(aws_ssm_parameter.snapshot_id[0].arn, null)
+}
+
+output "ssm_parameter_name" {
+  description = "The name of the SSM parameter storing the snapshot name"
+  value       = try(aws_ssm_parameter.snapshot_id[0].name, null)
+}
