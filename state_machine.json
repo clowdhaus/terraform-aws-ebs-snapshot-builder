@@ -33,9 +33,9 @@
             "DeviceName": "/dev/xvda",
             "Ebs": {
               "DeleteOnTermination": true,
-              "Iops.$": ${ebs_volume_settings.iops},
-              "Throughput.$": ${ebs_volume_settings.throughput},
-              "VolumeSize.$": ${ebs_volume_settings.volume_size},
+              "Iops": ${ebs_volume_settings.iops},
+              "Throughput": ${ebs_volume_settings.throughput},
+              "VolumeSize": ${ebs_volume_settings.volume_size},
               "VolumeType": "gp3"
             }
           },
@@ -43,9 +43,9 @@
             "DeviceName": "/dev/xvdb",
             "Ebs": {
               "DeleteOnTermination": true,
-              "Iops.$": ${ebs_volume_settings.iops},
-              "Throughput.$": ${ebs_volume_settings.throughput},
-              "VolumeSize.$": ${ebs_volume_settings.volume_size},
+              "Iops": ${ebs_volume_settings.iops},
+              "Throughput": ${ebs_volume_settings.throughput},
+              "VolumeSize": ${ebs_volume_settings.volume_size},
               "VolumeType": "gp3"
             }
           }
