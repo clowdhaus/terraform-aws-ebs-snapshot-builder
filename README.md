@@ -97,6 +97,8 @@ Examples codified under the [`examples`](https://github.com/clowdhaus/terraform-
 
 | Name | Description |
 |------|-------------|
+| <a name="output_ssm_parameter_arn"></a> [ssm\_parameter\_arn](#output\_ssm\_parameter\_arn) | The ARN of the SSM parameter storing the snapshot name |
+| <a name="output_ssm_parameter_name"></a> [ssm\_parameter\_name](#output\_ssm\_parameter\_name) | The name of the SSM parameter storing the snapshot name |
 | <a name="output_start_execution_command"></a> [start\_execution\_command](#output\_start\_execution\_command) | Example awscli command to start the state machine execution |
 <!-- END_TF_DOCS -->
 
