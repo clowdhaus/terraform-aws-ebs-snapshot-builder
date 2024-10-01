@@ -7,6 +7,8 @@ on:
     paths:
       - '**.tf'
       - '!examples/**.tf'
+      - 'state_machine.json'
+      - '.github/workflows/semantic-releaser.yml'
 
 jobs:
   release:
