@@ -6,7 +6,7 @@
       "Type": "Pass",
       "Comment": "Define default values used when input values are not provided",
       "Parameters": {
-        "EnableFastSnapshotRestore": "${default_values.enable_fast_snapshot_restore}",
+        "EnableFastSnapshotRestore": ${default_values.enable_fast_snapshot_restore},
         "SnapshotName": "${default_values.snapshot_name}",
         "SnapshotDescription": "${default_values.snapshot_description}"
       },
