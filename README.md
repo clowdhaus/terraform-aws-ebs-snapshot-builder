@@ -81,7 +81,7 @@ Examples codified under the [`examples`](https://github.com/clowdhaus/terraform-
 | <a name="input_default_values"></a> [default\_values](#input\_default\_values) | A map of default values to use for the state machine | <pre>object({<br/>    enable_fast_snapshot_restore = optional(bool, true)<br/>    snapshot_name                = optional(string, "ml-container-cache")<br/>    snapshot_description         = optional(string, "ML container image cache")<br/>  })</pre> | `{}` | no |
 | <a name="input_ebs_volume_settings"></a> [ebs\_volume\_settings](#input\_ebs\_volume\_settings) | A map of EBS volume settings that will be used on the volumes (root + additional) attached to the instance created | <pre>object({<br/>    iops        = optional(number, 6000),<br/>    throughput  = optional(number, 500),<br/>    volume_size = optional(number, 64),<br/>  })</pre> | `{}` | no |
 | <a name="input_ecr_images"></a> [ecr\_images](#input\_ecr\_images) | A list of ECR images to pull | `list(string)` | `[]` | no |
-| <a name="input_eks_version"></a> [eks\_version](#input\_eks\_version) | The EKS version for the respective EKS AMI that will be used to create the EC2 instance | `string` | `"1.31"` | no |
+| <a name="input_eks_version"></a> [eks\_version](#input\_eks\_version) | The EKS version for the respective EKS AMI that will be used to create the EC2 instance | `string` | `"1.33"` | no |
 | <a name="input_fsr_availability_zone_names"></a> [fsr\_availability\_zone\_names](#input\_fsr\_availability\_zone\_names) | A list of availability zone names where EBS Fast Snapshot Restore will be enabled | `list(string)` | `[]` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | The instance type to launch | `string` | `"c6in.16xlarge"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the state machine | `string` | `""` | no |
@@ -91,7 +91,7 @@ Examples codified under the [`examples`](https://github.com/clowdhaus/terraform-
 | <a name="input_state_machine_tags"></a> [state\_machine\_tags](#input\_state\_machine\_tags) | A map of addititional tags to add to the state machine | `map(string)` | `{}` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | The subnet ID where the EC2 instance will be launched | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(string)` | `{}` | no |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID where the intance and security group will be created | `string` | `""` | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID where the instance and security group will be created | `string` | `""` | no |
 
 ## Outputs
 
