@@ -26,7 +26,7 @@
     "RunInstance": {
       "Type": "Task",
       "Comment": "Create instance using EKS AMI",
-      "Resource": "arn:aws:states:::aws-sdk:ec2:runInstances",
+      "Resource": "arn:${partition}:states:::aws-sdk:ec2:runInstances",
       "Parameters": {
         "BlockDeviceMappings": [
           {
@@ -84,7 +84,7 @@
     "DescribeInstance": {
       "Type": "Task",
       "Comment": "Get the state of the instance",
-      "Resource": "arn:aws:states:::aws-sdk:ec2:describeInstances",
+      "Resource": "arn:${partition}:states:::aws-sdk:ec2:describeInstances",
       "Parameters": {
         "InstanceIds.$": "States.Array($.Instance.Id)"
       },
@@ -132,7 +132,7 @@
     "GetCloudInitStatus": {
       "Type": "Task",
       "Comment": "Get cloud-init status - proxy signal to determine if user-data has completed",
-      "Resource": "arn:aws:states:::aws-sdk:ssm:sendCommand",
+      "Resource": "arn:${partition}:states:::aws-sdk:ssm:sendCommand",
       "Parameters": {
         "DocumentName": "AWS-RunShellScript",
         "Parameters": {
@@ -167,7 +167,7 @@
     "GetCloudInitStatusResults": {
       "Type": "Task",
       "Comment": "Get cloud-init status results (text output from SSM command invocation)",
-      "Resource": "arn:aws:states:::aws-sdk:ssm:getCommandInvocation",
+      "Resource": "arn:${partition}:states:::aws-sdk:ssm:getCommandInvocation",
       "Parameters": {
         "CommandId.$": "$.Command.Id",
         "InstanceId.$": "$.Instance.Id"
@@ -234,7 +234,7 @@
     "GetCacheVolume": {
       "Type": "Task",
       "Comment": "Get volume ID to create snapshot",
-      "Resource": "arn:aws:states:::aws-sdk:ec2:describeInstances",
+      "Resource": "arn:${partition}:states:::aws-sdk:ec2:describeInstances",
       "Parameters": {
         "InstanceIds.$": "States.Array($.Instance.Id)"
       },
@@ -249,7 +249,7 @@
     "CreateSnapshot": {
       "Type": "Task",
       "Comment": "Create a snapshot of the cache volume",
-      "Resource": "arn:aws:states:::aws-sdk:ec2:createSnapshot",
+      "Resource": "arn:${partition}:states:::aws-sdk:ec2:createSnapshot",
       "Parameters": {
         "Description.$": "$.SnapshotDescription",
         "TagSpecifications": [
@@ -274,7 +274,7 @@
     "DescribeSnapshot": {
       "Type": "Task",
       "Comment": "Get the state of the snapshot",
-      "Resource": "arn:aws:states:::aws-sdk:ec2:describeSnapshots",
+      "Resource": "arn:${partition}:states:::aws-sdk:ec2:describeSnapshots",
       "Parameters": {
         "SnapshotIds.$": "States.Array($.Snapshot.Id)"
       },
@@ -310,7 +310,7 @@
     "UpdateSnapshotSsmParameter": {
       "Type": "Task",
       "Comment": "Update SSM parameter with new snapshot ID",
-      "Resource": "arn:aws:states:::aws-sdk:ssm:putParameter",
+      "Resource": "arn:${partition}:states:::aws-sdk:ssm:putParameter",
       "Parameters": {
         "Name": "${ssm_parameter_name}",
         "Overwrite": true,
@@ -335,7 +335,7 @@
     },
     "EnableFastSnapshotRestores": {
       "Type": "Task",
-      "Resource": "arn:aws:states:::aws-sdk:ec2:enableFastSnapshotRestores",
+      "Resource": "arn:${partition}:states:::aws-sdk:ec2:enableFastSnapshotRestores",
       "Parameters": {
         "AvailabilityZones": [
           "${availability_zones}"
@@ -350,7 +350,7 @@
     },
     "TerminateInstance": {
       "Type": "Task",
-      "Resource": "arn:aws:states:::aws-sdk:ec2:terminateInstances",
+      "Resource": "arn:${partition}:states:::aws-sdk:ec2:terminateInstances",
       "Parameters": {
         "InstanceIds.$": "States.Array($.Instance.Id)"
       },

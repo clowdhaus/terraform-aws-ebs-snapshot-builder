@@ -29,7 +29,7 @@ variable "state_machine_tags" {
 variable "eks_version" {
   description = "The EKS version for the respective EKS AMI that will be used to create the EC2 instance"
   type        = string
-  default     = "1.31"
+  default     = "1.33"
 }
 
 variable "ecr_images" {
@@ -98,7 +98,7 @@ variable "ssm_parameter_name" {
 ################################################################################
 
 variable "vpc_id" {
-  description = "The VPC ID where the intance and security group will be created"
+  description = "The VPC ID where the instance and security group will be created"
   type        = string
   default     = ""
 }

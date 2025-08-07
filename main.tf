@@ -7,7 +7,7 @@ data "aws_partition" "current" {
 }
 
 locals {
-  region     = try(data.aws_region.current[0].name, "")
+  region     = try(data.aws_region.current[0].region, "")
   partition  = try(data.aws_partition.current[0].partition, "")
   dns_suffix = try(data.aws_partition.current[0].dns_suffix, "")
 
@@ -27,7 +27,7 @@ data "aws_ssm_parameter" "eks_ami" {
 
 module "state_machine" {
   source  = "terraform-aws-modules/step-functions/aws"
-  version = "~> 4.2"
+  version = "~> 5.0"
 
   create = var.create
 
@@ -46,6 +46,7 @@ module "state_machine" {
     iam_instance_profile_arn = try(aws_iam_instance_profile.ec2[0].arn, "")
     instance_type            = var.instance_type
     security_group_id        = module.security_group.security_group_id
+    partition                = local.partition
     subnet_id                = var.subnet_id
     ssm_parameter_name       = try(aws_ssm_parameter.snapshot_id[0].name, "")
   }))
@@ -84,13 +85,13 @@ data "aws_iam_policy_document" "state_machine" {
       "ec2:EnableFastSnapshotRestores",
     ]
     resources = [
-      "arn:aws:ec2:*::image/*",
-      "arn:aws:ec2:*::snapshot/*",
-      "arn:aws:ec2:*:*:security-group/*",
-      "arn:aws:ec2:*:*:subnet/*",
-      "arn:aws:ec2:*:*:instance/*",
-      "arn:aws:ec2:*:*:volume/*",
-      "arn:aws:ec2:*:*:network-interface/*",
+      "arn:${local.partition}:ec2:*::image/*",
+      "arn:${local.partition}:ec2:*::snapshot/*",
+      "arn:${local.partition}:ec2:*:*:security-group/*",
+      "arn:${local.partition}:ec2:*:*:subnet/*",
+      "arn:${local.partition}:ec2:*:*:instance/*",
+      "arn:${local.partition}:ec2:*:*:volume/*",
+      "arn:${local.partition}:ec2:*:*:network-interface/*",
     ]
   }
 
