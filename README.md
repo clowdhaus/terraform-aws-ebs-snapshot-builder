@@ -42,7 +42,7 @@ Examples codified under the [`examples`](https://github.com/clowdhaus/terraform-
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.68 |
 
 ## Providers
@@ -56,7 +56,7 @@ Examples codified under the [`examples`](https://github.com/clowdhaus/terraform-
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.0 |
-| <a name="module_state_machine"></a> [state\_machine](#module\_state\_machine) | terraform-aws-modules/step-functions/aws | ~> 4.2 |
+| <a name="module_state_machine"></a> [state\_machine](#module\_state\_machine) | terraform-aws-modules/step-functions/aws | ~> 5.0 |
 
 ## Resources
 
